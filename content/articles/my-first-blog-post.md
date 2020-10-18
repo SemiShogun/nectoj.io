@@ -11,7 +11,7 @@ author:
   alt: placeholder for Jamie.png
 
 tags:
-    - test
+    - javascript
 ---
 
 ## Heading 1
