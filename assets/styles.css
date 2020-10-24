@@ -1,0 +1,30 @@
+html {
+    background-color: #E5E5E5;
+}
+
+body {
+    font-family: 'nunito-regular', sans-serif;
+    max-width: 70em;
+    min-height: 100vh;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    flex-direction: column;
+    height:100vh;
+}
+
+p {
+    font-family: 'nunito-regular', sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'nunito-bold', sans-serif;
+}
+
+li { 
+    list-style-type: none;
+}
+
+#__nuxt, #__layout {
+    height: 100vh;
+}

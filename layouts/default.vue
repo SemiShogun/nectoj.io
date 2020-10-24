@@ -1,31 +1,29 @@
 <template>
-  <nuxt />
+  <div>
+    <TheHeader />
+    <div class="spacing">
+      <main class="content">
+        <nuxt />
+      </main>
+    </div>
+    <TheFooter />
+  </div>
 </template>
 
-<script>
-export default {
-  data() {
-    return {
-      clipped: false,
-      drawer: false,
-      fixed: false,
-      items: [
-        {
-          icon: "mdi-apps",
-          title: "Welcome",
-          to: "/",
-        },
-        {
-          icon: "mdi-chart-bubble",
-          title: "Inspire",
-          to: "/inspire",
-        },
-      ],
-      miniVariant: false,
-      right: true,
-      rightDrawer: false,
-      title: "Vuetify.js",
-    };
-  },
-};
-</script>
+<style>
+.content {
+  display: flex;
+  flex: 1;
+  flex-direction: row;
+  min-width: 20em;
+  padding: 0em 1.5em 1em;
+  background-color: #ffffff;
+  color: #000000;
+  border-radius: 20px;
+}
+
+.spacing {
+  display: flex;
+  height: auto;
+}
+</style>

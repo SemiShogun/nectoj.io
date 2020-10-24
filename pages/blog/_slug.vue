@@ -1,24 +1,15 @@
 <template>
   <article>
-    <SearchInput />
-
     <h1>{{ article.title }}</h1>
+    <br/>
     <p>{{ article.description }}</p>
-    <img :src="article.img" :alt="article.alt" />
+    <br/>
     <p>Post last updated: {{ formatDate(article.updatedAt) }}</p>
-
-    <nav>
-      <ul>
-        <li v-for="link of article.toc" :key="link.id">
-          <NuxtLink :to="`#${link.id}`">{{ link.text }}</NuxtLink>
-        </li>
-      </ul>
-    </nav>
-
-    <nuxt-content :document="article" />
-
+    <br/>
+    <p>Tags: {{ article.tags }}</p>
+    <br/>
     <author :author="article.author" />
-
+    <br/>
     <prev-next :prev="prev" :next="next" />
   </article>
 </template>
