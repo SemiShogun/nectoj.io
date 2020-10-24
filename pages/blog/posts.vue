@@ -1,17 +1,21 @@
 <template>
   <div>
     <h1>Blog Posts</h1>
+    <p>You will find all of my blog posts here.</p>
     <ul>
-      <li v-for="article of articles" :key="article.slug">
-        <NuxtLink :to="{ name: 'blog-slug', params: { slug: article.slug } }">
-          <img :src="article.img" />
-          <div>
-            <h2>{{ article.title }}</h2>
-            <p>by {{ article.author.name }}</p>
-            <p>{{ article.description }}</p>
-          </div>
-        </NuxtLink>
-      </li>
+      <div class="posts">
+        <li v-for="article of articles" :key="article.slug">
+          <NuxtLink :to="{ name: 'blog-slug', params: { slug: article.slug } }">
+            <div>
+              <h2>{{ article.title }}</h2>
+              <p>{{ article.description }}</p>
+              <p>
+                {{ formatDate(article.updatedAt) }}
+              </p>
+            </div>
+          </NuxtLink>
+        </li>
+      </div>
     </ul>
   </div>
 </template>
@@ -20,7 +24,7 @@
 export default {
   async asyncData({ $content, params }) {
     const articles = await $content("articles", params.slug)
-      .only(["title", "description", "img", "slug", "author"])
+      .only(["title", "description", "img", "slug", "author", "createdAt"])
       .sortBy("createdAt", "asc")
       .fetch();
 
@@ -28,8 +32,29 @@ export default {
       articles,
     };
   },
+  methods: {
+    formatDate(date) {
+      const options = { year: "numeric", month: "long", day: "numeric" };
+      return new Date(date).toLocaleDateString("en", options);
+    },
+  },
 };
 </script>
 
-<style>
+<style scoped>
+.posts {
+  padding-top: 2em;
+}
+
+.posts > li > a > div {
+  padding-bottom: 1em;
+}
+
+.description {
+  font-size: 0.9em;
+}
+
+.creationDate {
+  font-size: 0.65em;
+}
 </style>

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div>
+    <div class="about">
       <h2>About Myself</h2>
       <p>
         Hello everyone! NectoJ here. I’m a developer apprentice from the snowy
@@ -11,7 +11,7 @@
       </p>
     </div>
     <div class="updates">
-      <div>
+      <div class="recent-blogs">
         <h2>Recent Updates</h2>
         <li v-for="article of articles" :key="article.slug">
           <NuxtLink :to="{ name: 'blog-slug', params: { slug: article.slug } }">
@@ -19,10 +19,15 @@
           </NuxtLink>
         </li>
       </div>
-      <div>
+      <div class="all-tags">
         <h2>Tags</h2>
         <li v-for="tag of tags" :key="tag.tag">
-          <NuxtLink :to="{ name: 'blog-tags-tag', params: { tag: tag.name.toLowerCase() } }">
+          <NuxtLink
+            :to="{
+              name: 'blog-tags-tag',
+              params: { tag: tag.name.toLowerCase() },
+            }"
+          >
             <p>{{ tag.name }}</p>
           </NuxtLink>
         </li>
@@ -54,7 +59,16 @@ export default {
 </script>
 
 <style scoped>
-.recent-blogs {
+.about {
+  padding-bottom: 1em;
+}
+
+.recent-blogs > li > a > p {
+  padding-bottom: 10px;
+}
+
+.all-tags > li > a > p {
+  padding-bottom: 10px;
 }
 
 .updates {
@@ -62,7 +76,11 @@ export default {
   width: 100%;
 }
 
-.updates > div {
-  width: 50%;
+.updates > div:first-child {
+  width: 60%;
+}
+
+.updates > div:last-child {
+  width: 40%;
 }
 </style>

@@ -7,10 +7,12 @@
     <p>{{ tag.description }}</p>
 
     <nuxt-content :document="tag" />
+    <br/>
     <NuxtLink to="/"
-      ><p>Back to All Articles</p></NuxtLink
+      ><p>Return to all posts</p></NuxtLink
     >
-    <h3>Articles tagged {{ tag.name }}:</h3>
+    <br/>
+    <h3>Articles tagged with {{ tag.name }}:</h3>
     <ul>
       <li v-for="article in articles" :key="article.slug">
         <NuxtLink :to="{ name: 'blog-slug', params: { slug: article.slug } }">

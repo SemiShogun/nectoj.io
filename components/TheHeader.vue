@@ -24,18 +24,12 @@ export default {};
   flex-shrink: 0;
 }
 
-.toolBar > a,
-.toolbar > a:link,
-.toolbar > a:visited,
-.toolbar > a:hover,
-.toolbar > a:focus,
-.toolbar > a:active {
-  text-decoration: none;
+.toolBar > a {
   padding: 0px 20px 0px 20px;
-  color: #6631ff;
 }
 
 .title {
   font-size: 2em;
+  text-decoration: none;
 }
 </style>

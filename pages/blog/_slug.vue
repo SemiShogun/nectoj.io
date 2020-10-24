@@ -1,16 +1,23 @@
 <template>
   <article>
     <h1>{{ article.title }}</h1>
-    <br/>
+    <br />
     <p>{{ article.description }}</p>
-    <br/>
-    <p>Post last updated: {{ formatDate(article.updatedAt) }}</p>
-    <br/>
-    <p>Tags: {{ article.tags }}</p>
-    <br/>
-    <author :author="article.author" />
-    <br/>
-    <prev-next :prev="prev" :next="next" />
+    <br />
+    <nuxt-content :document="article" />
+    <br />
+    <hr />
+    <div class="more-info">
+      <p>Post last updated: {{ formatDate(article.updatedAt) }}</p>
+      <div>
+        <span>Tags: </span>
+        <span v-for="(tag, id) in article.tags" :key="id">
+          <NuxtLink :to="`/blog/tags/${tags[tag].slug}`">
+            <span>{{ tags[tag].name }} </span>
+          </NuxtLink>
+        </span>
+      </div>
+    </div>
   </article>
 </template>
 
@@ -18,6 +25,13 @@
 export default {
   async asyncData({ $content, params }) {
     const article = await $content("articles", params.slug).fetch();
+
+    const tagsList = await $content("tags")
+      .only(["name", "slug"])
+      .where({ name: { $containsAny: article.tags } })
+      .fetch();
+
+    const tags = Object.assign({}, ...tagsList.map((s) => ({ [s.name]: s })));
 
     const [prev, next] = await $content("articles")
       .only(["title", "slug"])
@@ -27,6 +41,7 @@ export default {
 
     return {
       article,
+      tags,
       prev,
       next,
     };
@@ -40,23 +55,22 @@ export default {
 };
 </script>
 
-<style>
-.nuxt-content h2 {
-  font-weight: bold;
-  font-size: 28px;
-}
-.nuxt-content h3 {
-  font-weight: bold;
-  font-size: 22px;
-}
-.nuxt-content p {
-  margin-bottom: 20px;
+<style scoped>
+article {
+  width: 100%;
 }
 
-.icon.icon-link {
-  display: inline-block;
-  width: 20px;
-  height: 20px;
-  background-size: 20px 20px;
+hr {
+  height: 1px;
+  border-width: 0;
+  color: #e5e5e5;
+  background-color: #e5e5e5;
+}
+
+.more-info {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 15px;
+  flex-shrink: 0;
 }
 </style>
