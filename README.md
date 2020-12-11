@@ -1,5 +1,10 @@
 # blog
 
+## Todo
+- Add a CMS for all the blogs.
+- Redesign the website.
+- Add an animated title.
+
 ## Build Setup
 
 ```bash
