@@ -15,8 +15,28 @@ collections:
     editor:
       preview: false
     fields:
-      - { label: 'Title', name: 'title', widget: 'string' }
-      - { label: 'Publish Date', name: 'date', widget: 'datetime' }
-      - { label: 'Description', name: 'description', widget: 'string' }
-      - { label: 'Body', name: 'body', widget: 'markdown' }
-      - { label: 'Tags', name: 'tags', widget: 'string'}
+      - { label: 'Title', name: 'title', widget: 'string', }
+      - { label: 'Publish Date', name: 'publishdate', widget: 'datetime' }
+      - { label: 'SEO Description', name: 'seoDescription', widget: 'string', required: false }
+      - { label: 'Content', name: 'content', widget: 'markdown', required: true }
+      - { label: 'Tags', name: 'tags', widget: 'string', required: false }
+      - { label: 'SEO Meta Image', name: seoMetaImage, widget: image, required: false }
+  - name: "meta"
+    label: "Meta"
+    delete: false
+    editor:
+      preview: false
+    files:
+      - name: "tags"
+        label: "Tags"
+        file: "content/tags.yml"
+        description: "Contains list of tags"
+        fields:
+          - label: "Slug"
+            name: "slug"
+            widget: "string"
+            hint: "The part of the URL that identifies the tag"
+          - label: "Display Name"
+            name: "name"
+            widget: "string"
+            hint: "Tag name for displaying on the site"
